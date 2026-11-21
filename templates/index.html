@@ -423,7 +423,7 @@
 
             const msgPortes = document.getElementById('msg-portes');
             if (subComDesconto >= 50) msgPortes.innerHTML = '🎉 Parabéns! Tens <strong>Portes Grátis</strong>!';
-            else msgPortes.innerHTML = `Faltam <strong>${(35 - subComDesconto).toFixed(2)}€</strong> para portes grátis!`;
+            else msgPortes.innerHTML = `Faltam <strong>${(50 - subComDesconto).toFixed(2)}€</strong> para portes grátis!`;
 
             document.getElementById('contador').innerText = qtdTotal;
             document.getElementById('subtotal').innerText = sub.toFixed(2) + '€';
