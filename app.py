@@ -137,7 +137,7 @@ def checkout():
                     return jsonify({"sucesso": False, "mensagem": f"Stock insuficiente para '{prod['nome']}'. Restam {prod['stock']} un."}), 400
                 prod["stock"] -= item["qtd"]
 
-    nova_encomenda = {
+  nova_encomenda = {
         "id": len(dados["encomendas"]) + 1001,
         "data": datetime.now().strftime("%d/%m/%Y %H:%M"),
         "cliente": payload["cliente"],
@@ -146,14 +146,17 @@ def checkout():
         "cupao": payload.get("cupao", ""),
         "itens": itens,
         "total": payload["total"],
-        "estado": "Pendente"
+        "estado": "Aguardar Pagamento"
     }
     dados["encomendas"].insert(0, nova_encomenda)
     guardar_dados(dados)
 
     return jsonify({
         "sucesso": True,
-        "mensagem": f"Encomenda #{nova_encomenda['id']} confirmada! Obrigada pela tua preferência, {payload['cliente']['nome']}."
+        "encomenda_id": nova_encomenda["id"],
+        "total": nova_encomenda["total"],
+        "mensagem": f"Encomenda #{nova_encomenda['id']} registada! Aguarda validação após pagamento."
+    })
     })
 
 # --- PAINEL DE ADMINISTRAÇÃO ---
