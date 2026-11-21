@@ -134,10 +134,10 @@ def checkout():
         for prod in dados["produtos"]:
             if prod["id"] == item["id"]:
                 if prod["stock"] < item["qtd"]:
-                    return jsonify({"sucesso": False, "mensagem": f"Stock insuficiente para '{prod['nome']}'. Restam {prod['stock']} un."}), 400
+                    return jsonify({"sucesso": False, "mensagem": f"Stock insuficiente para {prod['nome']}."}), 400
                 prod["stock"] -= item["qtd"]
 
-  nova_encomenda = {
+    nova_encomenda = {
         "id": len(dados["encomendas"]) + 1001,
         "data": datetime.now().strftime("%d/%m/%Y %H:%M"),
         "cliente": payload["cliente"],
@@ -156,7 +156,6 @@ def checkout():
         "encomenda_id": nova_encomenda["id"],
         "total": nova_encomenda["total"],
         "mensagem": f"Encomenda #{nova_encomenda['id']} registada! Aguarda validação após pagamento."
-    })
     })
 
 # --- PAINEL DE ADMINISTRAÇÃO ---
