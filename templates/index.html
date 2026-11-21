@@ -443,7 +443,7 @@
             e.preventDefault();
             const sub = carrinho.reduce((a, i) => a + i.preco * i.qtd, 0);
             const subDesc = sub * (1 - descontoPct);
-            const total = subDesc + (subDesc >= 35 ? 0 : 3.50);
+            const total = subDesc + (subDesc >= 50 ? 0 : 3.50);
 
             const res = await fetch('/api/checkout', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
