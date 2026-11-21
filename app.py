@@ -1,10 +1,14 @@
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, Response
 
 app = Flask(__name__)
 FICHEIRO_DADOS = "dados_amora.json"
+
+# Credenciais de acesso à Área Admin (altera a palavra-passe se quiseres)
+ADMIN_USER = "admin"
+ADMIN_PASS = "amora2026"
 
 PRODUTOS_INICIAIS = [
     {
@@ -81,7 +85,6 @@ def carregar_dados():
         return dados
     with open(FICHEIRO_DADOS, "r", encoding="utf-8") as f:
         dados = json.load(f)
-        # Garante compatibilidade caso o ficheiro antigo não tenha campo stock/estado
         for p in dados.get("produtos", []):
             p.setdefault("stock", 5)
         for e in dados.get("encomendas", []):
@@ -91,6 +94,18 @@ def carregar_dados():
 def guardar_dados(dados):
     with open(FICHEIRO_DADOS, "w", encoding="utf-8") as f:
         json.dump(dados, f, ensure_ascii=False, indent=4)
+
+# --- PROTEÇÃO DA ÁREA ADMIN ---
+@app.before_request
+def proteger_rotas_admin():
+    if request.path.startswith("/admin"):
+        auth = request.authorization
+        if not auth or auth.username != ADMIN_USER or auth.password != ADMIN_PASS:
+            return Response(
+                "Acesso restrito à administração da Amora Store.",
+                401,
+                {"WWW-Authenticate": 'Basic realm="Area Admin Amora Store"'}
+            )
 
 # --- ROTAS DA LOJA ---
 @app.route("/")
