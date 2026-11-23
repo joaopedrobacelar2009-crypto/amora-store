@@ -319,10 +319,14 @@
                 <p>Bijuteria artesanal feita com dedicação em Portugal.</p>
                 <p style="margin-top:8px;">Instagram: <a href="https://www.instagram.com/amora.store_pt/" target="_blank" rel="noopener noreferrer">@amora.store_pt</a></p>
             </div>
-            <div><h4>Apoio ao Cliente</h4><p>Envios em 24/48h úteis<br>Trocas até 14 dias<br>Contacto: amorastorebijuteria@gmail.com</p></div>
+            <div><h4>Apoio ao Cliente</h4><p>Envios em 24/48h úteis<br>Contacto: amorastorebijuteria@gmail.com</p></div>
             <div><h4>Pagamentos Seguros</h4><p>MB WAY • Transferência Bancária • Envio à Cobrança</p></div>
         </div>
         <div class="footer-copy">&copy; 2026 Amora Store — Todos os direitos reservados.</div>
+        <div style="margin-top: 12px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.85rem;">
+        <a href="javascript:void(0)" onclick="abrirModalLegal('modal-termos')" style="color: inherit; text-decoration: underline;">Termos e Condições</a>
+        <a href="javascript:void(0)" onclick="abrirModalLegal('modal-privacidade')" style="color: inherit; text-decoration: underline;">Política de Privacidade</a>
+    </div>
     </footer>
 
     <script>
@@ -563,7 +567,64 @@
         }
         render();
     </script>
+    <!-- MODAL TERMOS E CONDIÇÕES -->
+<div id="modal-termos" onclick="if(event.target===this) fecharModalLegal('modal-termos')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fff; color:#2d2d2d; max-width:620px; width:100%; max-height:82vh; overflow-y:auto; border-radius:16px; padding:28px; position:relative; box-shadow:0 15px 40px rgba(0,0,0,0.2); text-align:left; line-height:1.6;">
+        <button onclick="fecharModalLegal('modal-termos')" style="position:absolute; top:16px; right:18px; background:none; border:none; font-size:22px; cursor:pointer; color:#666;">&times;</button>
+        <h3 style="margin-top:0; color:#5a1e38; font-size:1.35rem;">Termos e Condições</h3>
+        <p style="font-size:0.85rem; color:#777; margin-bottom:16px;">Última atualização: Novembro de 2026</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">1. Âmbito e Objeto</h4>
+        <p style="font-size:0.92rem; margin-top:0;">Os presentes Termos e Condições regulam o acesso, a navegação e as encomendas efetuadas através da loja online <strong>Amora Store</strong>, dedicada à criação e comercialização de bijuteria artesanal montada manualmente em Portugal.</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">2. Produtos e Artesanato</h4>
+        <p style="font-size:0.92rem; margin-top:0;">Todas as peças são produzidas manualmente conta a conta. Devido à natureza artesanal dos materiais e à calibração de cada ecrã, podem verificar-se ligeiras variações de tonalidade ou acabamento que tornam cada peça única.</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">3. Preços e Pagamentos</h4>
+        <p style="font-size:0.92rem; margin-top:0;">Todos os preços apresentados no site estão expressos em Euros (€). A encomenda apenas é considerada confirmada e entra em preparação após a receção e validação do pagamento através dos métodos disponibilizados no checkout (MB WAY ou Transferência Bancária / IBAN).</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">4. Preparação e Envios</h4>
+        <p style="font-size:0.92rem; margin-top:0;">As encomendas são enviadas via CTT para a morada indicada pelo cliente no formulário de compra. O cliente é responsável por garantir que os dados de envio e contacto telefónico estão corretos. A Amora Store não se responsabiliza por atrasos imputáveis aos serviços postais.</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">5. Cuidados com as Peças</h4>
+        <p style="font-size:0.92rem; margin-top:0;">Para preservar o brilho e a durabilidade da bijuteria artesanal, recomenda-se evitar o contacto direto com perfumes, cremes, água do mar ou piscinas, guardando a peça na bolsa de algodão fornecida.</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">6. Propriedade Intelectual</h4>
+        <p style="font-size:0.92rem; margin-top:0;">Todos os conteúdos, fotografias, textos e elementos visuais presentes na Amora Store são propriedade da marca, sendo proibida a sua reprodução sem autorização prévia.</p>
+    </div>
+</div>
+
+<!-- MODAL POLÍTICA DE PRIVACIDADE -->
+<div id="modal-privacidade" onclick="if(event.target===this) fecharModalLegal('modal-privacidade')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fff; color:#2d2d2d; max-width:620px; width:100%; max-height:82vh; overflow-y:auto; border-radius:16px; padding:28px; position:relative; box-shadow:0 15px 40px rgba(0,0,0,0.2); text-align:left; line-height:1.6;">
+        <button onclick="fecharModalLegal('modal-privacidade')" style="position:absolute; top:16px; right:18px; background:none; border:none; font-size:22px; cursor:pointer; color:#666;">&times;</button>
+        <h3 style="margin-top:0; color:#5a1e38; font-size:1.35rem;">Política de Privacidade</h3>
+        <p style="font-size:0.85rem; color:#777; margin-bottom:16px;">Em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD)</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">1. Dados Pessoais Recolhidos</h4>
+        <p style="font-size:0.92rem; margin-top:0;">Ao realizar uma encomenda na <strong>Amora Store</strong>, recolhemos apenas os dados estritamente necessários para processar o seu pedido: nome completo, endereço de email, número de telefone/telemóvel e morada de envio.</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">2. Finalidade do Tratamento</h4>
+        <p style="font-size:0.92rem; margin-top:0;">Os dados recolhidos destinam-se exclusivamente à gestão e confirmação de encomendas, expedição postal através dos CTT e contacto direto com o cliente caso surja alguma questão relacionada com o pagamento ou entrega.</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">3. Partilha de Dados com Terceiros</h4>
+        <p style="font-size:0.92rem; margin-top:0;">A Amora Store não vende, cede nem partilha os seus dados pessoais com terceiros para fins comerciais ou publicitários, sendo apenas transmitidos os dados de entrega indispensáveis à transportadora (CTT).</p>
+
+        <h4 style="margin-bottom:4px; color:#333;">4. Conservação e Direitos do Titular</h4>
+        <p style="font-size:0.92rem; margin-top:0;">Os dados são conservados apenas durante o período necessário ao cumprimento da encomenda e obrigações legais aplicáveis. A qualquer momento poderá solicitar o acesso, retificação ou eliminação dos seus dados pessoais através do email de contacto indicado no rodapé desta página.</p>
+    </div>
+</div>
+
+<script>
+function abrirModalLegal(id) {
+    document.getElementById(id).style.display = 'flex';
+}
+function fecharModalLegal(id) {
+    document.getElementById(id).style.display = 'none';
+}
+</script>
 </body>
 </html>
+
 
 
