@@ -69,6 +69,7 @@
                 <div class="encomenda-card">
                     <strong>Pedido #{{ e.id }}</strong> — {{ e.data }} | <strong>Total: {{ "%.2f"|format(e.total) }}€</strong> ({{ e.pagamento }})<br>
                     <small><strong>Cliente:</strong> {{ e.cliente.nome }} ({{ e.cliente.email }}) — {{ e.cliente.morada }}</small>
+                    <div>📞 {{ e.cliente.telefone or 'Não indicado' }}</div>
                     {% if e.notas %}<br><small><strong>Notas:</strong> {{ e.notas }}</small>{% endif %}
                     <ul style="margin-top:6px;padding-left:20px;font-size:0.85rem;">
                         {% for i in e.itens %}
@@ -109,4 +110,5 @@
         </div>
     </div>
 </body>
+
 </html>
