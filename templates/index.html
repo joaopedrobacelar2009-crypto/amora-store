@@ -291,6 +291,10 @@
             <form class="form-checkout" id="form-checkout" onsubmit="enviar(event)">
                 <input type="text" id="nome" placeholder="Nome completo" required>
                 <input type="email" id="email" placeholder="E-mail para seguimento" required>
+                <div style="margin-bottom: 12px;">
+    <label style="display:block; font-size:13px; font-weight:600; margin-bottom:4px;">Telefone / Telemóvel *</label>
+    <input type="tel" id="cliente-telefone" required placeholder="Ex: 912 345 678" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
+</div>
                 <input type="text" id="morada" placeholder="Morada completa e Código Postal" required>
                 <select id="pagamento" onchange="render()">
                     <option value="MB WAY">Pagamento por MB WAY</option>
@@ -560,3 +564,4 @@
     </script>
 </body>
 </html>
+
