@@ -1,35 +1,15 @@
 {
-    "produtos": [
-        {
-            "id": 2,
-            "nome": "Choker Pérola & Amora",
-            "categoria": "Elegantes",
-            "preco": 18.0,
-            "descricao": "Pérolas de água doce irregulares e missangas roxas profundas.",
-            "imagem": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80",
-            "destaque": "Exclusivo",
-            "stock": 7
-        },
-        {
-            "id": 3,
-            "nome": "Colar Boho Sunset",
-            "categoria": "Boho",
-            "preco": 16.0,
-            "descricao": "Tons terrosos, âmbar e pendente central em pedra natural.",
-            "imagem": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80",
-            "destaque": "",
-            "stock": 5
-        },
-        {
-            "id": 4,
-            "nome": "Colar Pastel Dream",
-            "categoria": "Coloridos",
-            "preco": 13.5,
-            "descricao": "Missangas foscas em tons pastel (lilás, menta e rosa bebé).",
-            "imagem": "https://images.unsplash.com/photo-1601121141799-c70a1871976b?auto=format&fit=crop&w=600&q=80",
-            "destaque": "Novo",
-            "stock": 5
-        }
-    ],
-    "encomendas": []
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Amorino",
+      "categoria": "Elegantes",
+      "preco": 15.5,
+      "stock": 10,
+      "descricao": "Colar artesanal de contas vermelhas intensas com detalhes e pendente de coração em aço inoxidável dourado.",
+      "imagem": "/static/amorino.jpg",
+      "destaque": "Novo"
+    }
+  ],
+  "encomendas": []
 }
