@@ -13,63 +13,13 @@ ADMIN_PASS = "amora2026"
 PRODUTOS_INICIAIS = [
     {
         "id": 1,
-        "nome": "Colar Verão Tropical",
-        "categoria": "Coloridos",
-        "preco": 14.50,
-        "stock": 8,
-        "descricao": "Missangas de vidro checo em tons de coral, turquesa e amarelo sol com extensor de 5cm.",
-        "imagem": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80",
-        "destaque": "Mais Vendido"
-    },
-    {
-        "id": 2,
-        "nome": "Choker Pérola & Amora",
+        "nome": "Amorino",
         "categoria": "Elegantes",
-        "preco": 18.00,
-        "stock": 5,
-        "descricao": "Pérolas de água doce irregulares combinadas artesanalmente com missangas roxas profundas.",
-        "imagem": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80",
-        "destaque": "Exclusivo"
-    },
-    {
-        "id": 3,
-        "nome": "Colar Boho Sunset",
-        "categoria": "Boho",
-        "preco": 16.00,
-        "stock": 6,
-        "descricao": "Tons terrosos, âmbar e pendente central em pedra natural. Ideal para sobreposições.",
-        "imagem": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80",
-        "destaque": ""
-    },
-    {
-        "id": 4,
-        "nome": "Colar Pastel Dream",
-        "categoria": "Coloridos",
-        "preco": 13.50,
+        "preco": 15.50,
         "stock": 10,
-        "descricao": "Missangas foscas em tons pastel (lilás, menta e rosa bebé) muito leves para o dia a dia.",
-        "imagem": "https://images.unsplash.com/photo-1601121141799-c70a1871976b?auto=format&fit=crop&w=600&q=80",
+        "descricao": "Colar artesanal de contas vermelhas intensas com detalhes e pendente de coração em aço inoxidável dourado.",
+        "imagem": "/static/amorino.jpg",
         "destaque": "Novo"
-    },
-    {
-        "id": 5,
-        "nome": "Choker Minimal Gold",
-        "categoria": "Elegantes",
-        "preco": 15.00,
-        "stock": 4,
-        "descricao": "Micro-missangas japonesas Miyuki douradas resistentes à água com brilho sutil.",
-        "imagem": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80",
-        "destaque": ""
-    },
-    {
-        "id": 6,
-        "nome": "Colar Oceano Profundo",
-        "categoria": "Boho",
-        "preco": 17.50,
-        "stock": 3,
-        "descricao": "Mistura artesanal de azuis marinhos, madrepérola e búzios naturais selecionados.",
-        "imagem": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=600&q=80",
-        "destaque": "Edição Limitada"
     }
 ]
 
@@ -171,7 +121,7 @@ def admin():
             "preco": float(request.form["preco"]),
             "stock": int(request.form["stock"]),
             "descricao": request.form["descricao"],
-            "imagem": request.form["imagem"] or "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80",
+            "imagem": request.form["imagem"] or "/static/amorino.jpg",
             "destaque": request.form["destaque"]
         }
         dados["produtos"].append(novo_produto)
