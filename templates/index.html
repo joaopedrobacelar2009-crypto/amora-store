@@ -374,7 +374,8 @@
         </div>
         <div class="footer-copy">&copy; 2026 Amora Store — Todos os direitos reservados.</div>
         <div style="margin-top: 12px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 0.85rem;">
-        <a href="javascript:void(0)" onclick="abrirModalLegal('modal-termos')" style="color: inherit; text-decoration: underline;">Termos e Condições</a>
+       <a href="javascript:void(0)" onclick="abrirModalLegal('modal-cuidados')" style="color: inherit; text-decoration: underline;">Cuidados com as Peças</a>
+            <a href="javascript:void(0)" onclick="abrirModalLegal('modal-termos')" style="color: inherit; text-decoration: underline;">Termos e Condições</a>
         <a href="javascript:void(0)" onclick="abrirModalLegal('modal-privacidade')" style="color: inherit; text-decoration: underline;">Política de Privacidade</a>
     </div>
     </footer>
@@ -617,6 +618,35 @@
         }
         render();
     </script>
+    <!-- MODAL CUIDADOS COM AS PEÇAS -->
+    <div id="modal-cuidados" onclick="if(event.target===this) fecharModalLegal('modal-cuidados')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:400; align-items:center; justify-content:center; padding:20px;">
+        <div style="background:#fff; color:#2d2d2d; max-width:540px; width:100%; max-height:82vh; overflow-y:auto; border-radius:16px; padding:28px; position:relative; text-align:left;">
+            <button onclick="fecharModalLegal('modal-cuidados')" style="position:absolute; top:16px; right:18px; background:none; border:none; font-size:22px; cursor:pointer;">&times;</button>
+            <span style="font-size:0.74rem; text-transform:uppercase; color:#75666d; letter-spacing:0.8px;">Guia de Conservação</span>
+            <h3 style="margin-top:4px; margin-bottom:12px; color:#6b2146; font-family:'Playfair Display',serif; font-size:1.5rem;">Cuidados com as Tuas Peças</h3>
+            <p style="font-size:0.88rem; color:#5a4a52; margin-bottom:16px; line-height:1.6;">
+                Todos os nossos fechos e extensores são em <strong>aço inoxidável</strong> (não escurecem nem provocam alergias), mas as pedras naturais, pérolas e fios artesanais agradecem alguns cuidados simples:
+            </p>
+            <div style="font-size:0.86rem; color:#2d2428; line-height:1.65; display:flex; flex-direction:column; gap:10px;">
+                <div style="background:#f8eff4; padding:12px 14px; border-radius:10px;">
+                    <strong style="color:#6b2146;">1. Perfumes e cremes por último</strong><br>
+                    Coloca a tua bijuteria apenas depois de aplicares perfume, creme hidratante ou protetor solar, evitando o contacto direto com químicos que possam tirar brilho às pérolas e pedras.
+                </div>
+                <div style="background:#f8eff4; padding:12px 14px; border-radius:10px;">
+                    <strong style="color:#6b2146;">2. Evita água com cloro ou sal</strong><br>
+                    Embora o aço inoxidável resista à água, recomendamos retirar os colares antes de entrar na piscina, no mar ou durante o exercício físico intenso para preservar a resistência do fio.
+                </div>
+                <div style="background:#f8eff4; padding:12px 14px; border-radius:10px;">
+                    <strong style="color:#6b2146;">3. Guarda cada peça separadamente</strong><br>
+                    Quando não estiveres a usar, guarda o teu colar na bolsa de algodão da Amora Store ou pendurado, evitando que se risque ou embarace noutras peças.
+                </div>
+                <div style="background:#f8eff4; padding:12px 14px; border-radius:10px;">
+                    <strong style="color:#6b2146;">4. Limpeza suave</strong><br>
+                    Para devolver o brilho natural, limpa delicadamente com um pano macio e seco após o uso.
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- MODAL TERMOS E CONDIÇÕES -->
 <div id="modal-termos" onclick="if(event.target===this) fecharModalLegal('modal-termos')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9999; align-items:center; justify-content:center; padding:20px;">
     <div style="background:#fff; color:#2d2d2d; max-width:620px; width:100%; max-height:82vh; overflow-y:auto; border-radius:16px; padding:28px; position:relative; box-shadow:0 15px 40px rgba(0,0,0,0.2); text-align:left; line-height:1.6;">
