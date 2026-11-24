@@ -287,7 +287,7 @@
             </div>
             <div class="linha-resumo"><span>Subtotal:</span><span id="subtotal">0.00€</span></div>
             <div class="linha-resumo" id="linha-desconto" style="display:none; color:#27ae60;"><span>Desconto:</span><span id="desconto-valor">-0.00€</span></div>
-            <div class="linha-resumo"><span>Portes CTT:</span><span id="portes">3.50€</span></div>
+            <div class="linha-resumo"><span>Portes CTT:</span><span id="portes">6.00€</span></div>
             <div class="linha-resumo total-final"><span>Total:</span><span id="total">0.00€</span></div>
 
             <button class="btn-finalizar" id="btn-avancar" onclick="abrirForm()">Avançar para Encomenda</button>
@@ -451,7 +451,7 @@
             const valorDesconto = sub * descontoPct;
             const subComDesconto = sub - valorDesconto;
             const metodo = document.getElementById('pagamento').value;
-            let portes = (sub === 0 || subComDesconto >= 50) ? 0 : 3.50;
+            let portes = (sub === 0 || subComDesconto >= 50) ? 0 : 6.00;
             if (sub > 0 && metodo === 'Envio à Cobrança') portes += 2.00;
             return { sub, valorDesconto, subComDesconto, portes, total: subComDesconto + portes };
         }
