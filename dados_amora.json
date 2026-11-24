@@ -3,7 +3,7 @@
     {
       "id": 1,
       "nome": "Amorino",
-      "categoria": "Elegantes",
+      "categoria": "Colares com Pingente",
       "preco": 15.5,
       "stock": 10,
       "descricao": "Colar artesanal de contas vermelhas intensas com detalhes e pendente de coração em aço inoxidável dourado.",
@@ -13,7 +13,7 @@
     {
       "id": 2,
       "nome": "Amonita",
-      "categoria": "Boho",
+      "categoria": "Pedras Naturais",
       "preco": 16.5,
       "stock": 5,
       "descricao": "Colar artesanal montado conta a conta com detalhes naturais e fecho em aço inoxidável.",
