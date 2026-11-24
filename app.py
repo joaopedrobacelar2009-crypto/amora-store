@@ -2,11 +2,13 @@ import json
 import os
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, redirect, url_for, Response
+import psycopg2
 
 app = Flask(__name__)
 FICHEIRO_DADOS = "dados_amora.json"
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
-# Credenciais de acesso à Área Admin (altera a palavra-passe se quiseres)
+# Credenciais de acesso à Área Admin
 ADMIN_USER = "admin"
 ADMIN_PASS = "amora2026"
 
@@ -28,20 +30,77 @@ CUPÕES = {
     "BEMVINDA": 0.15
 }
 
+def get_db_connection():
+    if not DATABASE_URL:
+        return None
+    url = DATABASE_URL
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+    return psycopg2.connect(url)
+
 def carregar_dados():
-    if not os.path.exists(FICHEIRO_DADOS):
-        dados = {"produtos": PRODUTOS_INICIAIS, "encomendas": []}
-        guardar_dados(dados)
-        return dados
-    with open(FICHEIRO_DADOS, "r", encoding="utf-8") as f:
-        dados = json.load(f)
-        for p in dados.get("produtos", []):
-            p.setdefault("stock", 5)
-        for e in dados.get("encomendas", []):
-            e.setdefault("estado", "Pendente")
-        return dados
+    dados_padrao = {"produtos": PRODUTOS_INICIAIS, "encomendas": []}
+    
+    # Se estiver ligado ao Supabase (Render)
+    if DATABASE_URL:
+        try:
+            conn = get_db_connection()
+            cur = conn.cursor()
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS loja_estado (
+                    id INTEGER PRIMARY KEY,
+                    dados JSONB NOT NULL
+                );
+            """)
+            conn.commit()
+            cur.execute("SELECT dados FROM loja_estado WHERE id = 1;")
+            row = cur.fetchone()
+            if row is None:
+                cur.execute(
+                    "INSERT INTO loja_estado (id, dados) VALUES (1, %s::jsonb);",
+                    (json.dumps(dados_padrao, ensure_ascii=False),)
+                )
+                conn.commit()
+                dados = dados_padrao
+            else:
+                dados = row[0] if isinstance(row[0], dict) else json.loads(row[0])
+            cur.close()
+            conn.close()
+        except Exception as e:
+            print("Erro ao ligar ao Supabase:", e)
+            dados = dados_padrao
+    else:
+        # Fallback local caso corras no teu computador sem DATABASE_URL
+        if not os.path.exists(FICHEIRO_DADOS):
+            guardar_dados(dados_padrao)
+            dados = dados_padrao
+        else:
+            with open(FICHEIRO_DADOS, "r", encoding="utf-8") as f:
+                dados = json.load(f)
+
+    for p in dados.get("produtos", []):
+        p.setdefault("stock", 5)
+    for e in dados.get("encomendas", []):
+        e.setdefault("estado", "Pendente")
+    return dados
 
 def guardar_dados(dados):
+    if DATABASE_URL:
+        try:
+            conn = get_db_connection()
+            cur = conn.cursor()
+            cur.execute("""
+                INSERT INTO loja_estado (id, dados)
+                VALUES (1, %s::jsonb)
+                ON CONFLICT (id) DO UPDATE SET dados = EXCLUDED.dados;
+            """, (json.dumps(dados, ensure_ascii=False),))
+            conn.commit()
+            cur.close()
+            conn.close()
+            return
+        except Exception as e:
+            print("Erro ao guardar no Supabase:", e)
+
     with open(FICHEIRO_DADOS, "w", encoding="utf-8") as f:
         json.dump(dados, f, ensure_ascii=False, indent=4)
 
