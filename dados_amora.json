@@ -9,6 +9,16 @@
       "descricao": "Colar artesanal de contas vermelhas intensas com detalhes e pendente de coração em aço inoxidável dourado.",
       "imagem": "/static/amorino.jpg",
       "destaque": "Novo"
+    },
+    {
+      "id": 2,
+      "nome": "Amonita",
+      "categoria": "Boho",
+      "preco": 16.5,
+      "stock": 5,
+      "descricao": "Colar artesanal montado conta a conta com detalhes naturais e fecho em aço inoxidável.",
+      "imagem": "/static/amonita.jpg",
+      "destaque": "Novidade"
     }
   ],
   "encomendas": []
