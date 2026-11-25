@@ -278,12 +278,6 @@ def apagar_produto(produto_id):
     dados["produtos"] = [p for p in dados["produtos"] if p["id"] != produto_id]
     guardar_dados(dados)
     return redirect(url_for("admin"))
-@app.route("/admin/apagar/<int:produto_id>")
-def apagar_produto(produto_id):
-    dados = carregar_dados()
-    dados["produtos"] = [p for p in dados["produtos"] if p["id"] != produto_id]
-    guardar_dados(dados)
-    return redirect(url_for("admin"))
 
 @app.route("/admin/apagar_encomenda/<int:encomenda_id>")
 def apagar_encomenda(encomenda_id):
@@ -302,7 +296,5 @@ def apagar_encomenda(encomenda_id):
             print("Erro ao apagar encomenda da tabela:", e)
     return redirect(url_for("admin"))
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
