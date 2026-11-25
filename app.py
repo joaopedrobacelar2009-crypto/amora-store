@@ -190,12 +190,13 @@ def admin():
     faturacao = sum(e["total"] for e in dados["encomendas"])
     return render_template("admin.html", produtos=dados["produtos"], encomendas=dados["encomendas"], faturacao=faturacao)
 
-@app.route("/admin/stock/<int:produto_id>/<int(signed=True):delta>")
-def alterar_stock(produto_id, delta):
+@app.route("/admin/stock/<int:produto_id>", methods=["POST"])
+def definir_stock(produto_id):
     dados = carregar_dados()
+    novo_stock = int(request.form.get("stock", 0))
     for p in dados["produtos"]:
         if p["id"] == produto_id:
-            p["stock"] = max(0, p["stock"] + delta)
+            p["stock"] = max(0, novo_stock)
     guardar_dados(dados)
     return redirect(url_for("admin"))
 
