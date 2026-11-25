@@ -82,7 +82,7 @@
                         <li>{{ i.qtd }}x {{ i.nome }} [{{ i.detalhes }}] — {{ "%.2f"|format(i.preco) }}€</li>
                         {% endfor %}
                     </ul>
-                    <form class="estado-form" method="POST" action="/admin/estado/{{ e.id }}">
+<form class="estado-form" method="POST" action="/admin/estado/{{ e.id }}">
                         <select name="estado">
                             <option value="Pendente" {% if e.estado == 'Pendente' %}selected{% endif %}>⏳ Pendente</option>
                             <option value="Pago" {% if e.estado == 'Pago' %}selected{% endif %}>💳 Pago</option>
@@ -90,6 +90,7 @@
                             <option value="Entregue" {% if e.estado == 'Entregue' %}selected{% endif %}>✅ Entregue</option>
                         </select>
                         <button type="submit">Atualizar</button>
+                        <a href="/admin/apagar_encomenda/{{ e.id }}" class="apagar" onclick="return confirm('Tens a certeza que queres remover o Pedido #{{ e.id }}? Esta ação não pode ser desfeita.');" style="align-self:center;margin-left:8px;font-size:0.82rem;">Remover</a>
                     </form>
                 </div>
                 {% endfor %}
