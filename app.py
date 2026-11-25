@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 from datetime import datetime
@@ -41,7 +42,6 @@ def get_db_connection():
 def carregar_dados():
     dados_padrao = {"produtos": PRODUTOS_INICIAIS, "encomendas": []}
     
-    # Se estiver ligado ao Supabase (Render)
     if DATABASE_URL:
         try:
             conn = get_db_connection()
@@ -70,7 +70,6 @@ def carregar_dados():
             print("Erro ao ligar ao Supabase:", e)
             dados = dados_padrao
     else:
-        # Fallback local caso corras no teu computador sem DATABASE_URL
         if not os.path.exists(FICHEIRO_DADOS):
             guardar_dados(dados_padrao)
             dados = dados_padrao
@@ -138,7 +137,6 @@ def checkout():
 
     dados = carregar_dados()
 
-    # Verificar e descontar stock
     for item in itens:
         for prod in dados["produtos"]:
             if prod["id"] == item["id"]:
@@ -173,6 +171,16 @@ def admin():
     dados = carregar_dados()
     if request.method == "POST":
         novo_id = max([p["id"] for p in dados["produtos"]], default=0) + 1
+        
+        # Processar ficheiro de imagem carregado pelo formulário
+        imagem_final = "/static/amorino.jpg"
+        ficheiro_foto = request.files.get("foto")
+        if ficheiro_foto and ficheiro_foto.filename != "":
+            dados_binarios = ficheiro_foto.read()
+            tipo_mime = ficheiro_foto.content_type or "image/jpeg"
+            b64 = base64.b64encode(dados_binarios).decode("utf-8")
+            imagem_final = f"data:{tipo_mime};base64,{b64}"
+
         novo_produto = {
             "id": novo_id,
             "nome": request.form["nome"],
@@ -180,7 +188,7 @@ def admin():
             "preco": float(request.form["preco"]),
             "stock": int(request.form["stock"]),
             "descricao": request.form["descricao"],
-            "imagem": request.form["imagem"] or "/static/amorino.jpg",
+            "imagem": imagem_final,
             "destaque": request.form["destaque"]
         }
         dados["produtos"].append(novo_produto)
