@@ -19,7 +19,10 @@
         button { background: #6b2146; color: #fff; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; }
         table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
         th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #eee; }
-        .stock-btn { background: #f8eff4; color: #6b2146; padding: 2px 8px; border-radius: 4px; text-decoration: none; font-weight: 600; }
+        .stock-form { display: flex; align-items: center; gap: 6px; }
+        .stock-form input[type="number"] { width: 65px; margin: 0; padding: 5px 8px; text-align: center; font-weight: 600; }
+        .stock-form button { width: auto; padding: 6px 10px; font-size: 0.8rem; background: #f8eff4; color: #6b2146; border: 1px solid #e3c8d6; }
+        .stock-form button:hover { background: #6b2146; color: #fff; }
         .apagar { color: #c0392b; text-decoration: none; font-weight: 600; }
         .encomenda-card { background: #fcf9fb; border-left: 4px solid #6b2146; padding: 16px; margin-bottom: 14px; border-radius: 8px; }
         .estado-form { display: flex; gap: 8px; margin-top: 10px; max-width: 280px; }
@@ -98,9 +101,10 @@
                         <td>{{ p.nome }}<br><small style="color:#888;">{{ p.categoria }}</small></td>
                         <td>{{ "%.2f"|format(p.preco) }}€</td>
                         <td>
-                            <a href="/admin/stock/{{ p.id }}/-1" class="stock-btn">-</a>
-                            <strong style="margin:0 6px;">{{ p.stock }}</strong>
-                            <a href="/admin/stock/{{ p.id }}/1" class="stock-btn">+</a>
+                            <form class="stock-form" method="POST" action="/admin/stock/{{ p.id }}">
+                                <input type="number" name="stock" value="{{ p.stock }}" min="0" required>
+                                <button type="submit">OK</button>
+                            </form>
                         </td>
                         <td><a href="/admin/apagar/{{ p.id }}" class="apagar">Remover</a></td>
                     </tr>
