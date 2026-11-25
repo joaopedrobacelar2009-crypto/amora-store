@@ -278,6 +278,31 @@ def apagar_produto(produto_id):
     dados["produtos"] = [p for p in dados["produtos"] if p["id"] != produto_id]
     guardar_dados(dados)
     return redirect(url_for("admin"))
+@app.route("/admin/apagar/<int:produto_id>")
+def apagar_produto(produto_id):
+    dados = carregar_dados()
+    dados["produtos"] = [p for p in dados["produtos"] if p["id"] != produto_id]
+    guardar_dados(dados)
+    return redirect(url_for("admin"))
 
+@app.route("/admin/apagar_encomenda/<int:encomenda_id>")
+def apagar_encomenda(encomenda_id):
+    dados = carregar_dados()
+    dados["encomendas"] = [e for e in dados["encomendas"] if e["id"] != encomenda_id]
+    guardar_dados(dados)
+    if DATABASE_URL:
+        try:
+            conn = get_db_connection()
+            cur = conn.cursor()
+            cur.execute("DELETE FROM encomendas WHERE id = %s;", (encomenda_id,))
+            conn.commit()
+            cur.close()
+            conn.close()
+        except Exception as e:
+            print("Erro ao apagar encomenda da tabela:", e)
+    return redirect(url_for("admin"))
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
