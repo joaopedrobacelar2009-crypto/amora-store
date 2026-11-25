@@ -190,7 +190,7 @@ def admin():
     faturacao = sum(e["total"] for e in dados["encomendas"])
     return render_template("admin.html", produtos=dados["produtos"], encomendas=dados["encomendas"], faturacao=faturacao)
 
-@app.route("/admin/stock/<int:produto_id>/<int:delta>")
+@app.route("/admin/stock/<int:produto_id>/<int(signed=True):delta>")
 def alterar_stock(produto_id, delta):
     dados = carregar_dados()
     for p in dados["produtos"]:
