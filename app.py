@@ -46,13 +46,33 @@ def carregar_dados():
         try:
             conn = get_db_connection()
             cur = conn.cursor()
+            
+            # Tabela do catálogo / estado geral
             cur.execute("""
                 CREATE TABLE IF NOT EXISTS loja_estado (
                     id INTEGER PRIMARY KEY,
                     dados JSONB NOT NULL
                 );
             """)
+            
+            # Tabela limpa só para as encomendas
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS encomendas (
+                    id INTEGER PRIMARY KEY,
+                    data TEXT,
+                    cliente_nome TEXT,
+                    cliente_email TEXT,
+                    cliente_telefone TEXT,
+                    cliente_morada TEXT,
+                    pagamento TEXT,
+                    artigos TEXT,
+                    notas TEXT,
+                    total NUMERIC(10,2),
+                    estado TEXT
+                );
+            """)
             conn.commit()
+            
             cur.execute("SELECT dados FROM loja_estado WHERE id = 1;")
             row = cur.fetchone()
             if row is None:
@@ -102,6 +122,39 @@ def guardar_dados(dados):
 
     with open(FICHEIRO_DADOS, "w", encoding="utf-8") as f:
         json.dump(dados, f, ensure_ascii=False, indent=4)
+
+def guardar_encomenda_tabela(enc):
+    if not DATABASE_URL:
+        return
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        resumo_artigos = ", ".join([f"{i['qtd']}x {i['nome']} ({i['detalhes']})" for i in enc["itens"]])
+        cur.execute("""
+            INSERT INTO encomendas (
+                id, data, cliente_nome, cliente_email, cliente_telefone,
+                cliente_morada, pagamento, artigos, notas, total, estado
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON CONFLICT (id) DO UPDATE SET estado = EXCLUDED.estado;
+        """, (
+            enc["id"],
+            enc["data"],
+            enc["cliente"].get("nome", ""),
+            enc["cliente"].get("email", ""),
+            enc["cliente"].get("telefone", ""),
+            enc["cliente"].get("morada", ""),
+            enc["pagamento"],
+            resumo_artigos,
+            enc.get("notas", ""),
+            enc["total"],
+            enc["estado"]
+        ))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print("Erro ao gravar na tabela encomendas:", e)
 
 # --- PROTEÇÃO DA ÁREA ADMIN ---
 @app.before_request
@@ -153,10 +206,11 @@ def checkout():
         "cupao": payload.get("cupao", ""),
         "itens": itens,
         "total": payload["total"],
-        "estado": "Aguardar Pagamento"
+        "estado": "Pendente"
     }
     dados["encomendas"].insert(0, nova_encomenda)
     guardar_dados(dados)
+    guardar_encomenda_tabela(nova_encomenda)
 
     return jsonify({
         "sucesso": True,
@@ -172,7 +226,6 @@ def admin():
     if request.method == "POST":
         novo_id = max([p["id"] for p in dados["produtos"]], default=0) + 1
         
-        # Processar ficheiro de imagem carregado pelo formulário
         imagem_final = "/static/amorino.jpg"
         ficheiro_foto = request.files.get("foto")
         if ficheiro_foto and ficheiro_foto.filename != "":
@@ -215,6 +268,7 @@ def mudar_estado(encomenda_id):
     for e in dados["encomendas"]:
         if e["id"] == encomenda_id:
             e["estado"] = novo_estado
+            guardar_encomenda_tabela(e)
     guardar_dados(dados)
     return redirect(url_for("admin"))
 
